@@ -58,11 +58,7 @@ export function AppShell({ children }: { children: ReactNode }) {
     startCloudSync();
   }, []);
 
-  useEffect(() => {
-    if (ready && (!session || (cloud.ready && !cloud.signedIn))) void navigate({ to: "/login", replace: true });
-  }, [ready, session, cloud.ready, cloud.signedIn, navigate]);
-
-  if (!ready || !session || !cloud.ready || !cloud.signedIn) {
+  if (!ready || !cloud.ready) {
     return (
       <div className="grid min-h-screen place-items-center bg-surface">
         <div className="flex flex-col items-center gap-3">
