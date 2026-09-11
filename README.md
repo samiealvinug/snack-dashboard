@@ -110,6 +110,8 @@ SUPABASE_URL=https://<project-ref>.supabase.co
 SUPABASE_PUBLISHABLE_KEY=<publishable-key>
 ```
 
+The `VITE_` variables are required during the browser build, while the unprefixed variables are required by SSR and server middleware. If these are missing, the page shell may load but hydration fails with a “Missing Supabase environment variable(s)” error. Use `.env.example` as the checklist, then redeploy after saving the variables.
+
 `SUPABASE_SERVICE_ROLE_KEY` is only needed if server-side admin operations are added later. Never expose it with a `VITE_` prefix.
 
 4. In Supabase Dashboard > Authentication > URL Configuration, set the Vercel deployment URL as the Site URL and add the production and preview URLs to the redirect allow list.
