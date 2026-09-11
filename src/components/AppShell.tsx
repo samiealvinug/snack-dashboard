@@ -59,7 +59,7 @@ export function AppShell({ children }: { children: ReactNode }) {
     if (isSupabaseConfigured()) startCloudSync();
   }, []);
 
-  if (!ready || (isSupabaseConfigured() && !cloud.ready)) {
+  if (!ready) {
     return (
       <div className="grid min-h-screen place-items-center bg-surface">
         <div className="flex flex-col items-center gap-3">
