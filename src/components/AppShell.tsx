@@ -26,6 +26,7 @@ import { cn } from "@/lib/utils";
 import { pullFromCloud, signOutCloud, startCloudSync } from "@/lib/cloud";
 import { useCloud } from "@/lib/useCloud";
 import { loadSession, signOut, useSession, useSessionReady } from "@/lib/session";
+import { isSupabaseConfigured } from "@/integrations/supabase/client";
 
 const MAIN = [
   { to: "/", label: "Shop Dashboard", icon: LayoutGrid, exact: true },
@@ -55,10 +56,10 @@ export function AppShell({ children }: { children: ReactNode }) {
   useEffect(() => {
     hydrateStore();
     loadSession();
-    startCloudSync();
+    if (isSupabaseConfigured()) startCloudSync();
   }, []);
 
-  if (!ready || !cloud.ready) {
+  if (!ready || (isSupabaseConfigured() && !cloud.ready)) {
     return (
       <div className="grid min-h-screen place-items-center bg-surface">
         <div className="flex flex-col items-center gap-3">
