@@ -59,6 +59,10 @@ export function AppShell({ children }: { children: ReactNode }) {
     if (isSupabaseConfigured()) startCloudSync();
   }, []);
 
+  useEffect(() => {
+    if (ready && !session) void navigate({ to: "/login", replace: true });
+  }, [ready, session, navigate]);
+
   if (!ready) {
     return (
       <div className="grid min-h-screen place-items-center bg-surface">
